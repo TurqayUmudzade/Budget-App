@@ -37,7 +37,7 @@
                     <a href="dashboard.php">Dashboard</a>
                 </li>
                 <li>
-                    <a href="history2.php">History</a>
+                    <a href="history.php">History</a>
                 </li>
 
             </ul>

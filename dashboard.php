@@ -38,7 +38,7 @@
                     <a href="dashboard.php">Dashboard</a>
                 </li>
                 <li>
-                    <a href="history2.php">History</a>
+                    <a href="history.php">History</a>
                 </li>
 
             </ul>
@@ -176,17 +176,17 @@
                     <h5>Helpful Links</h5>
                     <ul>
 
-                        <li><i class="material-icons">
+                        <li><a href=""><i class="material-icons">
                                         chevron_right
-                                    </i>Add Transactions</li>
+                                    </i></a> Add Transactions</li>
 
-                        <li><i class="material-icons">
+                        <li><a href=""><i class="material-icons">
                                         chevron_right
-                                    </i>Dashboard</li>
+                                    </i></a>Dashboard</li>
 
-                        <li><i class="material-icons">
+                        <li><a href=""><i class="material-icons">
                                         chevron_right
-                                    </i>History</li>
+                                    </i></a>History</li>
 
 
                     </ul>
@@ -220,10 +220,10 @@
                     <p>Phone: (+994) 070-300-88-12</p>
                     <p>E-Mail:turgayau@code.edu.az</p>
                     <div class="icons">
-                        <i class="im im-facebook"></i>
+                        <a href="https://www.facebook.com/turqay.umudzade" target="_blank"><i class="im im-facebook"></i></a>
                         <i class="im im-twitter"></i>
-                        <i class="im im-linkedin"></i>
-                        <i class="im im-github"></i>
+                        <a href="https://www.linkedin.com/in/turqay-umudzade-05b779157/" target="_blank"><i class="im im-linkedin"></i></a>
+                        <a href="https://github.com/TurqayUmudzade" target="_blank"><i class="im im-github"></i></a>
                         <i class="im im-google-plus"></i>
                     </div>
 
