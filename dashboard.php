@@ -12,8 +12,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- MaterialICon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- ICON Monster -->
     <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css">
+     <!-- Boostrap NOT USED-->
     <link rel="stylesheet" href="https://stackpadth.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -57,24 +60,45 @@
                     <div class="head">
                         <h2>Popular Categories</h2>
                     </div>
-                    <div class="body">
+                    <div class="body popular-box-body">
+                      
                         <ul>
-                            <li> <i class="material-icons">
-                                keyboard_arrow_right
-                                </i> Food</li>
-                            <li><i class="material-icons">
-                                keyboard_arrow_right
-                                </i> Transportation</li>
-                            <li> <i class="material-icons">
-                                keyboard_arrow_right
-                                </i> Entertainment</li>
-                            <li><i class="material-icons">
-                                keyboard_arrow_right
-                                </i> Gas</li>
-                            <li> <i class="material-icons">
-                                keyboard_arrow_right
-                                </i>Rent</li>
+                        <?php
+                        //?Find most popular
+                    // SELECT COUNT(transactions.idTransaction) as NumberOFTransactions,transactions.idCategory,categories.category ,
+                    // ROUND(SUM(transactions.transactionAmount),1) AS Amount
+                    //  FROM `transactions`,categories
+                    //   WHERE transactions.idCategory=categories.idCategory
+                    //    GROUP BY idCategory ORDER BY `Amount` DESC
+
+                    $queryCat="SELECT
+                                     COUNT(transactions.idTransaction) as NumberOfTransactions,transactions.idCategory,
+                                     categories.category as nameCat,
+                                     ROUND(SUM(transactions.transactionAmount),1) AS Amount
+                                     FROM `transactions`,categories
+                                     WHERE transactions.idCategory=categories.idCategory AND categories.idAccounting=2 
+                                     GROUP BY idCategory ORDER BY `Amount` DESC LIMIT 5";
+                      $resultCat=mysqli_query($link,$queryCat);  
+                      while($row=mysqli_fetch_assoc($resultCat)){
+                          $countCat=$row['NumberOfTransactions'];
+                          $amountCat=$row['Amount'];
+                          $nameCat=$row['nameCat'];
+
+                          echo"<li> <i class='material-icons'>
+                          keyboard_arrow_right
+                          </i> {$nameCat} <p id='p-amountCat'>{$amountCat}$</p> <p id='p-countCat'>{$countCat}</p> </li>";
+
+                      }            
+
+                       ?>
                         </ul>
+                    
+                    </div>
+                    <div class="box-footer">
+                        <div class="design" id="y-design"></div>
+                        <p>Transactions</p>
+                        <div class="design" id="r-design"></div>
+                        <p> Money Spent</p>
                     </div>
                 </div>
                 <!-- STATISTICS MIDDLE 2 BOXES -->
@@ -183,7 +207,9 @@
                             <i class="material-icons">
                                 keyboard_arrow_right
                                 </i>Cash
+                               
                                 <?php 
+                                 //!Sends a query for negative sum and positive sum
                                  $query="SELECT ROUND(SUM(transactionAmount),1) as sumCash
                                   FROM `transactions`,categories
                                    WHERE categories.idCategory=transactions.idCategory AND idPayment=1 AND categories.idAccounting=1 
@@ -274,6 +300,13 @@
                                 keyboard_arrow_right
                                 </i>Other<p class="money-per-cat"></p></li>
                         </ul>
+                    </div>
+                    <div class="box-footer">
+                    <div class="design" id="r-design"></div>
+                        <p> Money Spent</p>
+                        <div class="design" id="g-design"></div>
+                        <p>Money Recieved</p>
+                        
                     </div>
                 </div>
             </div>

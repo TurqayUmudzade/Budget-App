@@ -199,7 +199,7 @@ select {
 
 #all {
     background: #F7FAFD;
-    height: 700px;
+    height: 600px;
 }
 
 .boxes {
@@ -331,6 +331,45 @@ select {
     background: rgb(238, 61, 44);
 }
 
+#p-countCat {
+    background: #FFC72C;
+}
+
+#p-amountCat {
+    background: rgb(238, 61, 44);
+}
+
+#dashboard .box-footer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#dashboard .box-footer p {
+    line-height: 1;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#dashboard .box-footer .design {
+    height: 10px;
+    width: 10px;
+    position: relative;
+    top: 15px;
+    left: 15px;
+}
+
+#dashboard .box-footer #y-design {
+    background: #FFC72C;
+}
+
+#dashboard .box-footer #r-design {
+    background: rgb(238, 61, 44);
+}
+
+#dashboard .box-footer #g-design {
+    background: rgb(20, 196, 111);
+}
+
 
 /*                                   FOOTER                                */
 
@@ -342,6 +381,11 @@ footer {
 
 footer p {
     color: white !important;
+}
+
+footer .container {
+    width: 1200px;
+    margin: 0 auto;
 }
 
 footer .container .main {
