@@ -1,5 +1,5 @@
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif !important;
     padding: 0px;
     margin: 0px;
 }
@@ -205,7 +205,7 @@ select {
 .boxes {
     position: relative;
     top: 75px;
-    margin: 20px 50px;
+    margin: 20px 30px;
     display: flex;
     justify-content: space-between;
 }
@@ -384,7 +384,19 @@ footer p {
 }
 
 footer .container {
+    width: 1200px !important;
+    margin: 0 auto;
+}
+
+
+/* for bootstrap */
+
+#bootstrap-override {
     width: 1200px;
+}
+
+footer .mycontainer {
+    width: 1200px !important;
     margin: 0 auto;
 }
 
@@ -482,4 +494,44 @@ footer .container .copyright {
     font-size: 14px;
     color: #E5E9F7;
     padding: 0 5px;
+}
+
+
+/* Responsiveness */
+
+@media (max-width: 1200px) {
+    nav ul li {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 1200px) {
+    #add .col {
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 1140px) {
+    footer .main {
+        -ms-flex-wrap: wrap !important;
+        flex-wrap: wrap !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    #bootstrap-override {
+        max-width: 1200px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .boxes {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 1200px) {
+    .box {
+        /* margin: 30px 0; */
+    }
 }

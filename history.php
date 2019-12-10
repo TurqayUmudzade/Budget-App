@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+    
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <!-- MaterialICon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -19,8 +19,10 @@
     <!-- Data-Tables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/> 
     <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>  
+       <!-- MY CSS -->
+       <link rel="stylesheet" href="style.css">
 
-    <title>Document</title>
+    <title>History</title>
 </head>
 
 <body>
@@ -218,7 +220,8 @@
     </footer>
 
    
-    <script src="script.js"></script>
+    <script src="Loader.js"></script>
+    <script src="DataTable.js"></script>
 
 </body>
 

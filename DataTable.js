@@ -1,13 +1,3 @@
-$(window).on("load", function() {
-    $(".loader-wrapper").fadeOut(1600);
-})
-
-$("#submit").on("click", function() {
-    alert("Insertion Complete");
-})
-
-
-
 var today = new Date();
 var monthly = today.getFullYear() + '-' + (today.getMonth() + 1);
 var annual = today.getFullYear();
