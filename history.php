@@ -201,10 +201,10 @@
                     <p>Phone: (+994) 070-300-88-12</p>
                     <p>E-Mail:turgayau@code.edu.az</p>
                     <div class="icons">
-                        <i class="im im-facebook"></i>
+                    <a href="https://www.facebook.com/turqay.umudzade" target="_blank"><i class="im im-facebook"></i></a>
                         <i class="im im-twitter"></i>
-                        <i class="im im-linkedin"></i>
-                        <i class="im im-github"></i>
+                        <a href="https://www.linkedin.com/in/turqay-umudzade-05b779157/" target="_blank"><i class="im im-linkedin"></i></a>
+                        <a href="https://github.com/TurqayUmudzade" target="_blank"><i class="im im-github"></i></a>
                         <i class="im im-google-plus"></i>
                     </div>
 
