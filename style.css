@@ -194,6 +194,11 @@ select {
     width: 150px !important;
 }
 
+#history option {
+    background: white;
+    color: black;
+}
+
 
 /*                  Dashboard                        */
 
