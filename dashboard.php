@@ -80,11 +80,17 @@
                                      WHERE transactions.idCategory=categories.idCategory AND categories.idAccounting=2 
                                      GROUP BY idCategory ORDER BY `Amount` DESC LIMIT 5";
                       $resultCat=mysqli_query($link,$queryCat);  
+
+                      $PopCatArray = array("Categories");
+                      $AmoutCatArray = array("AmountPerCategory");
+        
                       while($row=mysqli_fetch_assoc($resultCat)){
                           $countCat=$row['NumberOfTransactions'];
                           $amountCat=$row['Amount'];
                           $nameCat=$row['nameCat'];
 
+                          array_push($PopCatArray, $nameCat);
+                          array_push($AmoutCatArray, $amountCat);
                           echo"<li> <i class='material-icons'>
                           keyboard_arrow_right
                           </i> {$nameCat} <p id='p-amountCat'>{$amountCat}$</p> <p id='p-countCat'>{$countCat}</p> </li>";
@@ -322,37 +328,40 @@
     </div>
 </section>
 
+<?php
+
+echo"
 <script>
 let myChart = document.getElementById('myChart').getContext('2d');
 
 // Global Options
-Chart.defaults.global.defaultFontFamily = 'Lato';
+
 Chart.defaults.global.defaultFontSize = 18;
-Chart.defaults.global.defaultFontColor = '#777';
+Chart.defaults.global.defaultFontColor = '#000000';
 
 let massPopChart = new Chart(myChart, {
     type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
     data: {
-        labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
+        labels: ['$PopCatArray[1]', '$PopCatArray[2]', '$PopCatArray[3]', '$PopCatArray[4]', '$PopCatArray[5]'],
         datasets: [{
-            label: 'Population',
+            label: 'Money',
             data: [
-                617594,
-                181045,
-                153060,
-                106519,
-                105162,
-                95072
+                $AmoutCatArray[1],
+                $AmoutCatArray[2],
+                $AmoutCatArray[3],
+                $AmoutCatArray[4],
+                $AmoutCatArray[5],
+               
             ],
-            //backgroundColor:'green',
+            
             backgroundColor: [
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(75, 192, 192, 0.6)',
-                'rgba(153, 102, 255, 0.6)',
+                'rgba(225, 43, 56,0.8)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(153, 102, 255, 0.7)',
                 'rgba(255, 159, 64, 0.6)',
-                'rgba(255, 99, 132, 0.6)'
+                
             ],
             borderWidth: 1,
             borderColor: '#777',
@@ -363,7 +372,7 @@ let massPopChart = new Chart(myChart, {
     options: {
         title: {
             display: true,
-            text: 'Largest Cities In Massachusetts',
+            text: 'Your Top 5 Spendings ',
             fontSize: 25
         },
         legend: {
@@ -385,7 +394,8 @@ let massPopChart = new Chart(myChart, {
             enabled: true
         }
     }
-});</script>
+});</script>";
+?>
    
 
     <footer>
