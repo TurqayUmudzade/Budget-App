@@ -48,51 +48,53 @@
 
     <section id="add">
 
-        <form action="addTransaction.php" method="POST">
+        <div class="container">
+            <form action="addTransaction.php" method="POST">
 
-            <div class="col">
-                <div class="form-group row col-md-6">
-                    <label for="exampleFormControlSelect1">Category</label>
-                    <select class="form-control" name="category" id="exampleFormControlSelect1">
-                              <option value="1"> Transportation </option>
-                              <option value="2">Entertainment</option>
-                              <option value="3">Rent</option>
-                              <option value="4">Phone</option>
-                              <option value="5">Food</option>
-                              <option value="6">Restaurant</option>
-                              <option value="7">Cinema</option>
-                              <option value="8">Theater</option>
-                              <option value="9">Gas</option>
-                              <option value="10">Postage</option>
-                              <option value="11">Travel</option>
-                              <option value="12">Leisure</option>
-                              <option value="13">Salary</option>
-                              <option value="14">Scholarship</option>
-                              <option value="15">Pocket money</option>
-                            </select>
-                </div>
-                <div class="form-group row col-md-6">
-                    <label for="peyment_method">Payment Method</label>
-                    <select class="form-control" name="payment" id="peyment_method">
-                                  <option value="1">Cash</option>
-                                  <option value="2">Check</option>
-                                  <option value="3">Bank card</option>
-                                  <option value="4">Bank transfer</option>
+                <div class="col">
+                    <div class="form-group row col-md-6">
+                        <label for="exampleFormControlSelect1">Category</label>
+                        <select class="form-control" name="category" id="exampleFormControlSelect1">
+                                  <option value="1"> Transportation </option>
+                                  <option value="2">Entertainment</option>
+                                  <option value="3">Rent</option>
+                                  <option value="4">Phone</option>
+                                  <option value="5">Food</option>
+                                  <option value="6">Restaurant</option>
+                                  <option value="7">Cinema</option>
+                                  <option value="8">Theater</option>
+                                  <option value="9">Gas</option>
+                                  <option value="10">Postage</option>
+                                  <option value="11">Travel</option>
+                                  <option value="12">Leisure</option>
+                                  <option value="13">Salary</option>
+                                  <option value="14">Scholarship</option>
+                                  <option value="15">Pocket money</option>
                                 </select>
+                    </div>
+                    <div class="form-group row col-md-6">
+                        <label for="peyment_method">Payment Method</label>
+                        <select class="form-control" name="payment" id="peyment_method">
+                                      <option value="1">Cash</option>
+                                      <option value="2">Check</option>
+                                      <option value="3">Bank card</option>
+                                      <option value="4">Bank transfer</option>
+                                    </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group col-md-6">
-                <label for="Amount">Enter Amount:</label>
-                <input type="text" class="form-control" name="amount" id="amount" placeholder="Amount">
-            </div>
+                <div class="form-group col-md-6">
+                    <label for="Amount">Enter Amount:</label>
+                    <input type="text" class="form-control" name="amount" id="amount" placeholder="Amount">
+                </div>
 
-            <div class="form-group col-md-6">
-                <label for="date">Enter Date:</label>
-                <input type="date" class="form-control" name="date" id="date">
-            </div>
-            <button class="mybtn" id="submit">Submit</button>
-        </form>
+                <div class="form-group col-md-6">
+                    <label for="date">Enter Date:</label>
+                    <input type="date" class="form-control" name="date" id="date">
+                </div>
+                <button class="mybtn" id="submit">Submit</button>
+            </form>
+        </div>
 
 
     </section>

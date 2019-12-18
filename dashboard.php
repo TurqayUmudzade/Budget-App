@@ -51,285 +51,286 @@
 
     </header>
 
-    <div id="all">
+    
         <section id="dashboard">
 
+            <div class="mycontainer">
             <div class="boxes">
 
-            <!-- POPULAR CAT -->
-                <div class="box">
-                    <div class="head">
-                        <h2>Popular Categories</h2>
-                    </div>
-                    <div class="body popular-box-body">
-                      
-                        <ul>
-                        <?php
-                        //?Find most popular
-                    // SELECT COUNT(transactions.idTransaction) as NumberOFTransactions,transactions.idCategory,categories.category ,
-                    // ROUND(SUM(transactions.transactionAmount),1) AS Amount
-                    //  FROM `transactions`,categories
-                    //   WHERE transactions.idCategory=categories.idCategory
-                    //    GROUP BY idCategory ORDER BY `Amount` DESC
+<!-- POPULAR CAT -->
+    <div class="box">
+        <div class="head">
+            <h2>Popular Categories</h2>
+        </div>
+        <div class="body popular-box-body">
+          
+            <ul>
+            <?php
+            //?Find most popular
+        // SELECT COUNT(transactions.idTransaction) as NumberOFTransactions,transactions.idCategory,categories.category ,
+        // ROUND(SUM(transactions.transactionAmount),1) AS Amount
+        //  FROM `transactions`,categories
+        //   WHERE transactions.idCategory=categories.idCategory
+        //    GROUP BY idCategory ORDER BY `Amount` DESC
 
-                    $queryCat="SELECT
-                                     COUNT(transactions.idTransaction) as NumberOfTransactions,transactions.idCategory,
-                                     categories.category as nameCat,
-                                     ROUND(SUM(transactions.transactionAmount),1) AS Amount
-                                     FROM `transactions`,categories
-                                     WHERE transactions.idCategory=categories.idCategory AND categories.idAccounting=2 
-                                     GROUP BY idCategory ORDER BY `Amount` DESC LIMIT 5";
-                      $resultCat=mysqli_query($link,$queryCat);  
+        $queryCat="SELECT
+                         COUNT(transactions.idTransaction) as NumberOfTransactions,transactions.idCategory,
+                         categories.category as nameCat,
+                         ROUND(SUM(transactions.transactionAmount),1) AS Amount
+                         FROM `transactions`,categories
+                         WHERE transactions.idCategory=categories.idCategory AND categories.idAccounting=2 
+                         GROUP BY idCategory ORDER BY `Amount` DESC LIMIT 5";
+          $resultCat=mysqli_query($link,$queryCat);  
 
-                      $PopCatArray = array("Categories");
-                      $AmoutCatArray = array("AmountPerCategory");
+          $PopCatArray = array("Categories");
+          $AmoutCatArray = array("AmountPerCategory");
+
+          while($row=mysqli_fetch_assoc($resultCat)){
+              $countCat=$row['NumberOfTransactions'];
+              $amountCat=$row['Amount'];
+              $nameCat=$row['nameCat'];
+
+              array_push($PopCatArray, $nameCat);
+              array_push($AmoutCatArray, $amountCat);
+              echo"<li> <i class='material-icons'>
+              keyboard_arrow_right
+              </i> {$nameCat} <p id='p-amountCat'>{$amountCat}$</p> <p id='p-countCat'>{$countCat}</p> </li>";
+
+          }            
+
+           ?>
+            </ul>
         
-                      while($row=mysqli_fetch_assoc($resultCat)){
-                          $countCat=$row['NumberOfTransactions'];
-                          $amountCat=$row['Amount'];
-                          $nameCat=$row['nameCat'];
+        </div>
+        <div class="box-footer">
+            <div class="design" id="y-design"></div>
+            <p>Transactions</p>
+            <div class="design" id="r-design"></div>
+            <p> Money Spent</p>
+        </div>
+    </div>
+    <!-- STATISTICS MIDDLE 2 BOXES -->
+    <div class="box parent-box">
+        <div class="mini-box">
+            <div class="mini-head">
+                <h3>Total Expenses</h3>
+            </div>
+            <div class="mini-body">
+            <div class="money-amount">
+                <?php
 
-                          array_push($PopCatArray, $nameCat);
-                          array_push($AmoutCatArray, $amountCat);
-                          echo"<li> <i class='material-icons'>
-                          keyboard_arrow_right
-                          </i> {$nameCat} <p id='p-amountCat'>{$amountCat}$</p> <p id='p-countCat'>{$countCat}</p> </li>";
+                //This weeks spending
+                $now=date("Y-m-d");
+                $week_ago=date("Y-m-d", strtotime("-1 week"));
+                $query_week="SELECT ROUND(SUM(transactionAmount),1) as sum
+                FROM `transactions`
+                WHERE  (transactionDate BETWEEN ' " . $week_ago ." ' AND ' " . $now. " ')";
+                $result_week = mysqli_query($link, $query_week);
+                $dataWeek=mysqli_fetch_assoc($result_week);
+                $this_week_spent=$dataWeek['sum'];
 
-                      }            
 
-                       ?>
-                        </ul>
+                //this month spendings
+
+                $now=date("Y-m-d");
+                $month_ago=date("Y-m-d", strtotime("-1 month"));
+                $query_month="SELECT ROUND(SUM(transactionAmount),1) as sum
+                FROM `transactions`
+                WHERE  (transactionDate BETWEEN ' " . $month_ago ." ' AND ' " . $now. " ')";
+                $result_mouth = mysqli_query($link, $query_month);
+                $data_month=mysqli_fetch_assoc($result_mouth);
+                $this_month_spent=$data_month['sum'];
+                ?>
+               
+                  
+                    <h2> <i class="material-icons">
+                attach_money
+                  </i> <?php echo $this_week_spent; ?> </h2>
                     
-                    </div>
-                    <div class="box-footer">
-                        <div class="design" id="y-design"></div>
-                        <p>Transactions</p>
-                        <div class="design" id="r-design"></div>
-                        <p> Money Spent</p>
-                    </div>
+                    <h2> <i id="icon-no-left"class="material-icons">
+                attach_money
+                  </i><?php echo $this_month_spent; ?></h2>
                 </div>
-                <!-- STATISTICS MIDDLE 2 BOXES -->
-                <div class="box parent-box">
-                    <div class="mini-box">
-                        <div class="mini-head">
-                            <h3>Total Expenses</h3>
-                        </div>
-                        <div class="mini-body">
-                        <div class="money-amount">
-                            <?php
-
-                            //This weeks spending
-                            $now=date("Y-m-d");
-                            $week_from_now=date("Y-m-d", strtotime("+1 week"));
-                            $query_week="SELECT ROUND(SUM(transactionAmount),1) as sum
-                            FROM `transactions`
-                            WHERE  (transactionDate BETWEEN ' " . $now ." ' AND ' " . $week_from_now. " ')";
-                            $result_week = mysqli_query($link, $query_week);
-                            $dataWeek=mysqli_fetch_assoc($result_week);
-                            $this_week_spent=$dataWeek['sum'];
-
-
-                            //this month spendings
-
-                            $now=date("Y-m-d");
-                            $month_from_now=date("Y-m-d", strtotime("+1 month"));
-                            $query_month="SELECT ROUND(SUM(transactionAmount),1) as sum
-                            FROM `transactions`
-                            WHERE  (transactionDate BETWEEN ' " . $now ." ' AND ' " . $month_from_now. " ')";
-                            $result_mouth = mysqli_query($link, $query_month);
-                            $data_month=mysqli_fetch_assoc($result_mouth);
-                            $this_month_spent=$data_month['sum'];
-                            ?>
-                           
-                              
-                                <h2> <i class="material-icons">
-                            attach_money
-                              </i> <?php echo $this_week_spent; ?> </h2>
-                                
-                                <h2> <i id="icon-no-left"class="material-icons">
-                            attach_money
-                              </i><?php echo $this_month_spent; ?></h2>
-                            </div>
-                            <div class="time-span">
-                                <h5>This Week</h5>
-                                <h5>This Month</h5>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="mini-box">
-                        <div class="mini-head">
-                            <h3>Total Transactions</h3>
-                        </div>
-                        <div class="mini-body">
-                        <div class="money-amount">
-                            <?php
-
-                            //!This week's transactions
-                            $now=date("Y-m-d");
-                            $week_from_now=date("Y-m-d", strtotime("+1 week"));
-                            $query_week="SELECT COUNT(idTransaction) as count
-                            FROM `transactions`
-                            WHERE  (transactionDate BETWEEN ' " . $now ." ' AND ' " . $week_from_now. " ')";
-                            $result_week = mysqli_query($link, $query_week);
-                            $dataWeek=mysqli_fetch_assoc($result_week);
-                            $this_week_transaction_count=$dataWeek['count'];
-
-
-                            //!This month's transactions
-
-                            $now=date("Y-m-d");
-                            $month_from_now=date("Y-m-d", strtotime("+1 month"));
-                            $query_month="SELECT COUNT(idTransaction) as count
-                            FROM `transactions`
-                            WHERE  (transactionDate BETWEEN ' " . $now ." ' AND ' " . $month_from_now. " ')";
-                            $result_mouth = mysqli_query($link, $query_month);
-                            $data_month=mysqli_fetch_assoc($result_mouth);
-                            $this_month_transaction_count=$data_month['count'];
-                            ?>
-                           
-                              
-                                <h2> <?php echo $this_week_transaction_count; ?> </h2>
-                                
-                                <h2> <?php echo $this_month_transaction_count; ?></h2>
-                            </div>
-                            <div class="time-span">
-                                <h5>This Week</h5>
-                                <h5>This Month</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <!-- POPULAR PAYMENT OPTIONS -->
-                <div class="box">
-                    <div class="head">
-                        <h2>Popular Transactions</h2>
-                    </div>
-                    <div class="body popular-box-body">
-                                
-
-                        <ul>
-                            <li> 
-                            
-                            <i class="material-icons">
-                                keyboard_arrow_right
-                                </i>Cash
-                               
-                                <?php 
-                                 //!Sends a query for negative sum and positive sum
-                                 $query="SELECT ROUND(SUM(transactionAmount),1) as sumCash
-                                  FROM `transactions`,categories
-                                   WHERE categories.idCategory=transactions.idCategory AND idPayment=1 AND categories.idAccounting=1 
-                                   UNION
-                                    SELECT ROUND(SUM(transactionAmount),1) 
-                                    FROM `transactions`,categories
-                                     WHERE categories.idCategory=transactions.idCategory AND idPayment=1 AND categories.idAccounting=2";
-                                 $result=mysqli_query($link,$query);
-                                 $i=1;
-                                 while($row=mysqli_fetch_assoc($result))
-                                 {
-                                 $sumCash=$row['sumCash'];
-                                 echo "<p id = 'p$i'>{$sumCash}$</p>";
-                                 $i=2;
-                                 }
-                                ?>
-                                </li>
-                            <li><i class="material-icons">
-                                keyboard_arrow_right
-                                </i> Check
-                                <?php 
-                                 $query="SELECT ROUND(SUM(transactionAmount),1) as sumCash
-                                  FROM `transactions`,categories
-                                   WHERE categories.idCategory=transactions.idCategory AND idPayment=2 AND categories.idAccounting=1 
-                                   UNION
-                                    SELECT ROUND(SUM(transactionAmount),1) 
-                                    FROM `transactions`,categories
-                                     WHERE categories.idCategory=transactions.idCategory AND idPayment=2 AND categories.idAccounting=2";
-                                 $result=mysqli_query($link,$query);
-                                 $i=1;
-                                 while($row=mysqli_fetch_assoc($result))
-                                 {
-                                     
-                                 
-                                 $sumCash=$row['sumCash'];
-                                 
-                                 echo "<p id = 'p$i'>{$sumCash}$</p>";
-                                 $i=2;
-                                 }
-                                ?></li>
-                            <li> <i class="material-icons">
-                                keyboard_arrow_right
-                                </i> Bank Card
-                                <?php 
-                                 $query="SELECT ROUND(SUM(transactionAmount),1) as sumCash
-                                  FROM `transactions`,categories
-                                   WHERE categories.idCategory=transactions.idCategory AND idPayment=3 AND categories.idAccounting=1 
-                                   UNION
-                                    SELECT ROUND(SUM(transactionAmount),1) 
-                                    FROM `transactions`,categories
-                                     WHERE categories.idCategory=transactions.idCategory AND idPayment=3 AND categories.idAccounting=2";
-                                 $result=mysqli_query($link,$query);
-                                 $i=1;
-                                 while($row=mysqli_fetch_assoc($result))
-                                 {
-                                     
-                                 
-                                 $sumCash=$row['sumCash'];
-                                 
-                                 echo "<p id = 'p$i'>{$sumCash}$</p>";
-                                 $i=2;
-                                 }
-                                ?></li>
-                            <li><i class="material-icons">
-                                keyboard_arrow_right
-                                </i> Bank Transfer
-                                 <?php 
-                                 $query="SELECT ROUND(SUM(transactionAmount),1) as sumCash
-                                  FROM `transactions`,categories
-                                   WHERE categories.idCategory=transactions.idCategory AND idPayment=4 AND categories.idAccounting=1 
-                                   UNION
-                                    SELECT ROUND(SUM(transactionAmount),1) 
-                                    FROM `transactions`,categories
-                                     WHERE categories.idCategory=transactions.idCategory AND idPayment=4 AND categories.idAccounting=2";
-                                 $result=mysqli_query($link,$query);
-                                 $i=1;
-                                 while($row=mysqli_fetch_assoc($result))
-                                 {
-                                     
-                                 
-                                 $sumCash=$row['sumCash'];
-                                 
-                                 echo " <p id = 'p$i'>{$sumCash}$</p>";
-                                 $i=2;
-                                 }
-                                ?></li>
-                            <li> <i class="material-icons">
-                                keyboard_arrow_right
-                                </i>Other<p class="money-per-cat"></p></li>
-                        </ul>
-                    </div>
-                    <div class="box-footer">
-                    <div class="design" id="r-design"></div>
-                        <p> Money Spent</p>
-                        <div class="design" id="g-design"></div>
-                        <p>Money Recieved</p>
-                        
-                    </div>
+                <div class="time-span">
+                    <h5>This Week</h5>
+                    <h5>This Month</h5>
                 </div>
             </div>
+            
+        </div>
+        <div class="mini-box">
+            <div class="mini-head">
+                <h3>Total Transactions</h3>
+            </div>
+            <div class="mini-body">
+            <div class="money-amount">
+                <?php
+
+                //!This week's transactions
+                $now=date("Y-m-d");
+                $week_ago=date("Y-m-d", strtotime("-1 week"));
+                $query_week="SELECT COUNT(idTransaction) as count
+                FROM `transactions`
+                WHERE  (transactionDate BETWEEN ' " . $week_ago ." ' AND ' " . $now. " ')";
+                $result_week = mysqli_query($link, $query_week);
+                $dataWeek=mysqli_fetch_assoc($result_week);
+                $this_week_transaction_count=$dataWeek['count'];
+
+
+                //!This month's transactions
+
+                $now=date("Y-m-d");
+                $month_ago=date("Y-m-d", strtotime("-1 month"));
+                $query_month="SELECT COUNT(idTransaction) as count
+                FROM `transactions`
+                WHERE  (transactionDate BETWEEN ' " . $month_ago ." ' AND ' " . $now. " ')";
+                $result_mouth = mysqli_query($link, $query_month);
+                $data_month=mysqli_fetch_assoc($result_mouth);
+                $this_month_transaction_count=$data_month['count'];
+                ?>
+               
+                  
+                    <h2> <?php echo $this_week_transaction_count; ?> </h2>
+                    
+                    <h2> <?php echo $this_month_transaction_count; ?></h2>
+                </div>
+                <div class="time-span">
+                    <h5>This Week</h5>
+                    <h5>This Month</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- POPULAR PAYMENT OPTIONS -->
+    <div class="box">
+        <div class="head">
+            <h2>Popular Transactions</h2>
+        </div>
+        <div class="body popular-box-body">
+                    
+
+            <ul>
+                <li> 
+                
+                <i class="material-icons">
+                    keyboard_arrow_right
+                    </i>Cash
+                   
+                    <?php 
+                     //!Sends a query for negative sum and positive sum
+                     $query="SELECT ROUND(SUM(transactionAmount),1) as sumCash
+                      FROM `transactions`,categories
+                       WHERE categories.idCategory=transactions.idCategory AND idPayment=1 AND categories.idAccounting=1 
+                       UNION
+                        SELECT ROUND(SUM(transactionAmount),1) 
+                        FROM `transactions`,categories
+                         WHERE categories.idCategory=transactions.idCategory AND idPayment=1 AND categories.idAccounting=2";
+                     $result=mysqli_query($link,$query);
+                     $i=1;
+                     while($row=mysqli_fetch_assoc($result))
+                     {
+                     $sumCash=$row['sumCash'];
+                     echo "<p id = 'p$i'>{$sumCash}$</p>";
+                     $i=2;
+                     }
+                    ?>
+                    </li>
+                <li><i class="material-icons">
+                    keyboard_arrow_right
+                    </i> Check
+                    <?php 
+                     $query="SELECT ROUND(SUM(transactionAmount),1) as sumCash
+                      FROM `transactions`,categories
+                       WHERE categories.idCategory=transactions.idCategory AND idPayment=2 AND categories.idAccounting=1 
+                       UNION
+                        SELECT ROUND(SUM(transactionAmount),1) 
+                        FROM `transactions`,categories
+                         WHERE categories.idCategory=transactions.idCategory AND idPayment=2 AND categories.idAccounting=2";
+                     $result=mysqli_query($link,$query);
+                     $i=1;
+                     while($row=mysqli_fetch_assoc($result))
+                     {
+                         
+                     
+                     $sumCash=$row['sumCash'];
+                     
+                     echo "<p id = 'p$i'>{$sumCash}$</p>";
+                     $i=2;
+                     }
+                    ?></li>
+                <li> <i class="material-icons">
+                    keyboard_arrow_right
+                    </i> Bank Card
+                    <?php 
+                     $query="SELECT ROUND(SUM(transactionAmount),1) as sumCash
+                      FROM `transactions`,categories
+                       WHERE categories.idCategory=transactions.idCategory AND idPayment=3 AND categories.idAccounting=1 
+                       UNION
+                        SELECT ROUND(SUM(transactionAmount),1) 
+                        FROM `transactions`,categories
+                         WHERE categories.idCategory=transactions.idCategory AND idPayment=3 AND categories.idAccounting=2";
+                     $result=mysqli_query($link,$query);
+                     $i=1;
+                     while($row=mysqli_fetch_assoc($result))
+                     {
+                         
+                     
+                     $sumCash=$row['sumCash'];
+                     
+                     echo "<p id = 'p$i'>{$sumCash}$</p>";
+                     $i=2;
+                     }
+                    ?></li>
+                <li><i class="material-icons">
+                    keyboard_arrow_right
+                    </i> Bank Transfer
+                     <?php 
+                     $query="SELECT ROUND(SUM(transactionAmount),1) as sumCash
+                      FROM `transactions`,categories
+                       WHERE categories.idCategory=transactions.idCategory AND idPayment=4 AND categories.idAccounting=1 
+                       UNION
+                        SELECT ROUND(SUM(transactionAmount),1) 
+                        FROM `transactions`,categories
+                         WHERE categories.idCategory=transactions.idCategory AND idPayment=4 AND categories.idAccounting=2";
+                     $result=mysqli_query($link,$query);
+                     $i=1;
+                     while($row=mysqli_fetch_assoc($result))
+                     {
+                         
+                     
+                     $sumCash=$row['sumCash'];
+                     
+                     echo " <p id = 'p$i'>{$sumCash}$</p>";
+                     $i=2;
+                     }
+                    ?></li>
+                <li> <i class="material-icons">
+                    keyboard_arrow_right
+                    </i>Other<p class="money-per-cat"></p></li>
+            </ul>
+        </div>
+        <div class="box-footer">
+        <div class="design" id="r-design"></div>
+            <p> Money Spent</p>
+            <div class="design" id="g-design"></div>
+            <p>Money Recieved</p>
+            
+        </div>
+    </div>
+</div>
+            </div>
         </section>
-      </div>
+      
 
     
 
    <section id="chart"> 
-       <div class="container">
+       <div class="mycontainer">
         <canvas id="myChart"></canvas>
     </div>
 </section>
 
 <?php
-
 echo"
 <script>
 let myChart = document.getElementById('myChart').getContext('2d');

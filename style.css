@@ -4,11 +4,6 @@ body {
     margin: 0px;
 }
 
-section {
-    width: 1200px;
-    margin: 50px auto;
-}
-
 .mybtn {
     margin: auto;
     width: 100px;
@@ -168,6 +163,7 @@ select {
 
 #add {
     max-width: 1000px;
+    margin: 20px auto;
 }
 
 #add form {
@@ -202,14 +198,8 @@ select {
 
 /*                  Dashboard                        */
 
-#all {
-    background: #F7FAFD;
-    height: 600px;
-}
-
 .boxes {
-    position: relative;
-    top: 75px;
+    padding: 60px 10px;
     margin: 20px 30px;
     display: flex;
     justify-content: space-between;
@@ -236,6 +226,10 @@ select {
     height: 180px;
     background: white;
     border-radius: 15px;
+}
+
+#dashboard {
+    background: #F7FAFD;
 }
 
 #dashboard .head {
@@ -400,6 +394,11 @@ footer .container {
     width: 1200px;
 }
 
+.mycontainer {
+    width: 1200px !important;
+    margin: 50px auto;
+}
+
 footer .mycontainer {
     width: 1200px !important;
     margin: 0 auto;
@@ -532,11 +531,12 @@ footer .container .copyright {
 @media (max-width: 1200px) {
     .boxes {
         flex-wrap: wrap;
+        justify-content: flex-start;
     }
 }
 
 @media (max-width: 1200px) {
     .box {
-        /* margin: 30px 0; */
+        margin-bottom: 40px;
     }
 }
