@@ -416,15 +416,15 @@ let massPopChart = new Chart(myChart, {
                     <h5>Helpful Links</h5>
                     <ul>
 
-                        <li><a href=""><i class="material-icons">
+                        <li><a href="home.html"><i class="material-icons">
                                         chevron_right
                                     </i></a> Add Transactions</li>
 
-                        <li><a href=""><i class="material-icons">
+                        <li><a href="dashboard.php"><i class="material-icons">
                                         chevron_right
                                     </i></a>Dashboard</li>
 
-                        <li><a href=""><i class="material-icons">
+                        <li><a href="history.php"><i class="material-icons">
                                         chevron_right
                                     </i></a>History</li>
 
@@ -447,7 +447,7 @@ let massPopChart = new Chart(myChart, {
                                         chevron_right
                                     </i>Support Center</li>
 
-                        <li><i class="material-icons">
+                        <li> <i class="material-icons">
                                         chevron_right
                                     </i>Contact</li>
 

@@ -158,18 +158,17 @@
                     <h5>Helpful Links</h5>
                     <ul>
 
-                        <li><i class="material-icons">
-                                    chevron_right
-                                </i>Add Transactions</li>
+                    <li><a href="home.html"><i class="material-icons">
+                                        chevron_right
+                                    </i></a> Add Transactions</li>
 
-                        <li><i class="material-icons">
-                                    chevron_right
-                                </i>Dashboard</li>
+                        <li><a href="dashboard.php"><i class="material-icons">
+                                        chevron_right
+                                    </i></a>Dashboard</li>
 
-                        <li><i class="material-icons">
-                                    chevron_right
-                                </i>History</li>
-
+                        <li><a href="history.php"><i class="material-icons">
+                                        chevron_right
+                                    </i></a>History</li>
                     
                     </ul>
                 </div>
